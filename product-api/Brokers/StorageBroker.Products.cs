@@ -21,6 +21,11 @@ namespace product_api.Brokers
         public IQueryable<Product> GetProductsAsync() =>
             _storageBroker.Products;
 
+        public async Task<Product?>GetProductByIdAsync(Guid id)
+        {
+            return await _storageBroker.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+        }
+
 
     }
 }

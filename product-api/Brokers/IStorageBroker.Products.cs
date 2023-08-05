@@ -6,5 +6,6 @@ namespace product_api.Brokers
     {
         Task AddProductAsync(Product product);
         IQueryable<Product> GetProductsAsync();
+        Task<Product?> GetProductByIdAsync(Guid id);
     }
 }
