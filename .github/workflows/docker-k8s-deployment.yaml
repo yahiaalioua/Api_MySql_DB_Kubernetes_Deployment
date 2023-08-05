@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - 'main'
+    paths-ignore:
+      - '**/*.yaml'
+      - '**/*.yml'
+      - '**/*.txt'
 env:
     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 jobs:
@@ -40,10 +44,10 @@ jobs:
       - name: Deploy api(Deployment)
         uses: actions-hub/kubectl@master
         with:
-          args: apply -f product-api-deployment.yaml
+          args: apply -f /Api_MySql_DB_Kubernetes_Deployment/product-api-deployment.yaml
       
       - name: Deploy load balancer service(Deployment)
         uses: actions-hub/kubectl@master
         with:
-          args: apply -f product-api-loadbalancer.yaml
+          args: apply -f /Api_MySql_DB_Kubernetes_Deployment/product-api-loadbalancer.yaml
   
