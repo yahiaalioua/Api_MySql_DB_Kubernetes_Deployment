@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - 'main'
-
+env:
+    KOBE_CONFIG: ${{secrets.KUBE_CONFIG}}
 jobs:
   build_and_push_docker_image:
     runs-on: "self-hosted"
@@ -27,8 +28,7 @@ jobs:
         with:
           push: true
           tags: yahiaalioua/product-api:1.0.1
-  env:
-    KOBE_CONFIG: ${{secrets.KUBE_CONFIG}}
+  
   deploy_to_kubernetes:
     runs-on: "self-hosted"
 
