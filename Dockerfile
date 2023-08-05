@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 # Copy the project files and restore dependencies
-COPY product-api.csproj .
+COPY product-api/product-api.csproj .
 RUN dotnet restore
 
 COPY . .
