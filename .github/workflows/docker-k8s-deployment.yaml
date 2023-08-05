@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: yahiaalioua/product-api:1.0.1
+          tags: yahiaalioua/product-api:latest
   
   deploy_to_kubernetes:
     needs: build_and_push_docker_image
