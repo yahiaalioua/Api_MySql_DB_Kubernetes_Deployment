@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - 'main'
-    paths-ignore:
-      - '**/*.yaml'
-      - '**/*.yml'
-      - '**/*.txt'
+    
 env:
     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 jobs:
