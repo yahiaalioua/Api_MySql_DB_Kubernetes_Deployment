@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  docker:
+  build_and_push_docker_image:
     runs-on: "self-hosted"
     steps:
       -
@@ -27,3 +27,22 @@ jobs:
         with:
           push: true
           tags: yahiaalioua/product-api:1.0.1
+  env:
+    KOBE_CONFIG: ${{secrets.KUBE_CONFIG}}
+  deploy_to_kubernetes:
+    runs-on: "self-hosted"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2      
+
+      - name: Deploy api(Deployment)
+        uses: actions-hub/kubectl@master
+        with:
+          args: apply -f product-api-deployment.yaml
+      
+      - name: Deploy load balancer service(Deployment)
+        uses: actions-hub/kubectl@master
+        with:
+          args: apply -f product-api-loadbalancer.yaml
+  
