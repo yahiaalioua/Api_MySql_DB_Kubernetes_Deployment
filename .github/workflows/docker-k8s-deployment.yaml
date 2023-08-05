@@ -41,10 +41,10 @@ jobs:
       - name: Deploy api(Deployment)
         uses: actions-hub/kubectl@master
         with:
-          args: apply -f /Api_MySql_DB_Kubernetes_Deployment/k8s_Deployment/product-api-deployment.yaml
+          args: apply -f https://raw.githubusercontent.com/yahiaalioua/Api_MySql_DB_Kubernetes_Deployment/main/k8s_Deployment/product-api-deployment.yaml
       
       - name: Deploy load balancer service(Deployment)
         uses: actions-hub/kubectl@master
         with:
-          args: apply -f /Api_MySql_DB_Kubernetes_Deployment/k8s_Deployment/product-api-loadbalancer.yaml
+          args: apply -f https://raw.githubusercontent.com/yahiaalioua/Api_MySql_DB_Kubernetes_Deployment/main/k8s_Deployment/product-api-loadbalancer.yaml
   
