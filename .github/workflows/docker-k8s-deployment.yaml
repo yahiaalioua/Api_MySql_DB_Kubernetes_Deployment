@@ -38,7 +38,7 @@ jobs:
       - name: Update Kubernetes Deployment Image
         run: |
           GENERATED_TAG=${{ steps.metadata.outputs.tags }}
-          sed -i "s|image: yahiaalioua/product-api:.*|image: yahiaalioua/product-api:$steps.metadata.outputs.tags|g" k8s_Deployment/product-api-deployment.yaml
+          sed -i "s|image: yahiaalioua/product-api:.*|image: yahiaalioua/product-api:$GENERATED_TAG|g" k8s_Deployment/product-api-deployment.yaml
 
       - name: Commit changes
         run: |
