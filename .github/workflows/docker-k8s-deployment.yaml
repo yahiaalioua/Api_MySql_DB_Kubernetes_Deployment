@@ -29,11 +29,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v3
         with:
-          images: yahiaalioua/product-api
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+          images: yahiaalioua/product-api:${{ steps.metadata.outputs.tags }}
         
       - name: Update Kubernetes Deployment Image
         run: |
