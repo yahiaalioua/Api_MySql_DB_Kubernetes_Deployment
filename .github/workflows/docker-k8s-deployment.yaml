@@ -73,7 +73,7 @@ jobs:
       - name: Update Kubernetes Deployment Image
         run: |
           GENERATED_TAG=${{ needs.build_and_push_docker_image.outputs.GENERATED_TAG }}
-          sed -i "s/<IMAGE_TAG>/$GENERATED_TAG/g" k8s_Deployment/product-api-deployment.yaml
+          sed -i "s|image: yahiaalioua/product-api:.*|image: yahiaalioua/product-api:$GENERATED_TAG|g" Api_MySql_DB_Kubernetes_Deployment/k8s_Deployment/product-api-deployment.yaml
 
       - name: Deploy api(Deployment)
         uses: actions-hub/kubectl@master
