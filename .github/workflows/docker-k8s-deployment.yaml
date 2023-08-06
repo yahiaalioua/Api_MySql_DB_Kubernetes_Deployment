@@ -50,6 +50,13 @@ jobs:
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          
+      - name: Capture Generated Tag
+        id: capture_tag
+        run: |
+          GENERATED_TAG=$(echo ${{ steps.metadata.outputs.tags }} | cut -d',' -f1)
+          echo "Generated Docker image tag: $GENERATED_TAG"
+          echo "GENERATED_TAG=$GENERATED_TAG" >> $GITHUB_ENV
 
       - name: Store Docker Image Tag for later update of k8s yaml file
         run: |
