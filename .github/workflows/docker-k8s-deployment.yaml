@@ -54,7 +54,6 @@ jobs:
       - name: Store Docker Image Tag for later update of k8s yaml file
         run: |
           GENERATED_TAG=$(echo ${{ needs.build_and_push_docker_image.outputs.GENERATED_TAG }})
-          kubectl set image deployment/product-api-deployment product-api=yahiaalioua/product-api:$GENERATED_TAG
   
   deploy_to_kubernetes:
     needs: build_and_push_docker_image
