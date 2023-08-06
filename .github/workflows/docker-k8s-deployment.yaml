@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths-ignore:
-      - '**/*.yaml'
+      #- '**/*.yaml'
       - '**/*.yml'
       - '**/*.txt'
     tags:
@@ -79,7 +79,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add Deployment/product-api-deployment.yaml
+          git add k8s_Deployment/product-api-deployment.yaml
           git commit -m "Update deployment YAML with Docker image tag"
           git push origin main
 
