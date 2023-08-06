@@ -17,6 +17,20 @@ jobs:
   build_and_push_docker_image:
     runs-on: "self-hosted"
     steps:
+    
+      - name: Debug
+        run: |
+          echo "github.ref -> {{ github.ref }}"
+ 
+      - name: Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: yahiaalioua/product-api
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -33,12 +47,9 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          images: yahiaalioua/product-api
           push: true
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
   
   deploy_to_kubernetes:
     needs: build_and_push_docker_image
