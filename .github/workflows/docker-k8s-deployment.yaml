@@ -8,6 +8,8 @@ on:
       - '**/*.yaml'
       - '**/*.yml'
       - '**/*.txt'
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
     
 env:
     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
@@ -31,8 +33,12 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
+          images: yahiaalioua/product-api
           push: true
-          tags: yahiaalioua/product-api:latest
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
   
   deploy_to_kubernetes:
     needs: build_and_push_docker_image
