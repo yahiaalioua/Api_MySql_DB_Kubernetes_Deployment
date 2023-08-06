@@ -14,14 +14,11 @@ on:
 env:
     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 jobs:
-  build_and_push_docker_image:
-    runs-on: "self-hosted"
         
           
       
   
   deploy_to_kubernetes:
-    needs: build_and_push_docker_image
     runs-on: "self-hosted"
 
     steps:
