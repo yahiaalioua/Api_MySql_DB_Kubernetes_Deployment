@@ -50,6 +50,11 @@ jobs:
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+
+      - name: Store Docker Image Tag for later update of k8s yaml file
+        run: |
+          GENERATED_TAG=$(echo ${{ needs.build_and_push_docker_image.outputs.GENERATED_TAG }})
+          kubectl set image deployment/product-api-deployment product-api=yahiaalioua/product-api:$GENERATED_TAG
   
   deploy_to_kubernetes:
     needs: build_and_push_docker_image
@@ -57,7 +62,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2      
+        uses: actions/checkout@v2 
+
+      - name: Update Kubernetes Deployment Image
+        run: |
+          GENERATED_TAG=${{ needs.build_and_push_docker_image.outputs.GENERATED_TAG }}
+          sed -i "s/<IMAGE_TAG>/$GENERATED_TAG/g" Api_MySql_DB_Kubernetes_Deployment/k8s_Deployment/product-api-deployment.yaml
 
       - name: Deploy api(Deployment)
         uses: actions-hub/kubectl@master
