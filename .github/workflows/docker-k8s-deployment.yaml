@@ -75,6 +75,14 @@ jobs:
           GENERATED_TAG=${{ needs.build_and_push_docker_image.outputs.GENERATED_TAG }}
           sed -i "s|image: yahiaalioua/product-api:.*|image: yahiaalioua/product-api:$GENERATED_TAG|g" k8s_Deployment/product-api-deployment.yaml
 
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add Deployment/product-api-deployment.yaml
+          git commit -m "Update deployment YAML with Docker image tag"
+          git push origin main
+
       - name: Deploy api(Deployment)
         uses: actions-hub/kubectl@master
         with:
