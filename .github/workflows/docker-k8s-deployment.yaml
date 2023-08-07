@@ -25,20 +25,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2 
         
-      - name: Docker metadata
-        id: metadata
-        uses: docker/metadata-action@v3
-        with:
-          images: yahiaalioua/product-api:${{ steps.metadata.outputs.tags }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+      - name: Fetch Image Tags
+        id: fetch_tags
+        run: |
+          TOKEN=${{ secrets.DOCKERHUB_TOKEN }}
+          IMAGE_NAME=yahiaalioua/product-api  # Replace with your Docker image name
+          API_URL="https://hub.docker.com/v2/repositories/${IMAGE_NAME}/tags/?ordering=last_updated"
+          TAGS_JSON=$(curl -s -H "Authorization: Bearer $TOKEN" $API_URL)
+          echo "::set-output name=tags::$(echo $TAGS_JSON | jq -r '.results[].name')"
+
+      - name: Get Latest Image Tag
+        id: get_latest_tag
+        run: |
+          TAGS=${{ steps.fetch_tags.outputs.tags }}
+          LATEST_TAG=$(echo "$TAGS" | sort -V | tail -1)
+          echo "::set-output name=latest_tag::$LATEST_TAG"
         
       - name: Update Kubernetes Deployment Image
         run: |
           FULL_IMAGE_TAG=${{ steps.metadata.outputs.tags }}
-          sed -i "s|image: yahiaalioua/product-api:.*|yahiaalioua/product-api:$FULL_IMAGE_TAG|g" k8s_Deployment/product-api-deployment.yaml
+          sed -i "s|image: yahiaalioua/product-api:.*|$LATEST_TAG|g" k8s_Deployment/product-api-deployment.yaml
 
       - name: Commit changes
         run: |
