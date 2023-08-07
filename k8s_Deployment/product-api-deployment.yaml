@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - yahiaalioua/product-api:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: product-api
         ports:
         - containerPort: 80
