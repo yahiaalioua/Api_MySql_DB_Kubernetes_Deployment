@@ -19,8 +19,6 @@ jobs:
     steps:
     
       - name: Debug
-        run: |
-          echo "github.ref -> {{ github.ref }}"
  
       - name: Docker metadata
         id: metadata
@@ -44,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: latest
+          tags: yahiaalioua/product-api:latest
           labels: ${{ steps.metadata.outputs.labels }}
   
   deploy_to_kubernetes:
