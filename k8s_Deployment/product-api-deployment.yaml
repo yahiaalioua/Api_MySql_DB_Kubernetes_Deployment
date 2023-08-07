@@ -16,7 +16,7 @@ spec:
         app: product-api
     spec:
       containers:
-      - image: yahiaalioua/product-api:yahiaalioua/product-api::main
+      - image: yahiaalioua/product-api:test
         imagePullPolicy: IfNotPresent
         name: product-api
         ports:
