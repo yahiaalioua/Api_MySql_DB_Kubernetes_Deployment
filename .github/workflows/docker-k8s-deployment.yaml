@@ -44,7 +44,7 @@ jobs:
       - name: Update Kubernetes Deployment Image
         run: |
           LATEST_TAG=${{ steps.get_latest_tag.outputs.latest_tag }}
-          sed -i "s|image: yahiaalioua/product-api:.*|image:$LATEST_TAG|g" k8s_Deployment/product-api-deployment.yaml
+          sed -i "s|image: yahiaalioua/product-api:.*|image: yahiaalioua/product-api:$LATEST_TAG|g" k8s_Deployment/product-api-deployment.yaml
 
       - name: Commit changes
         run: |
