@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>product_db.Unit.Tests</RootNamespace>
+    <RootNamespace>product_api.Integration.Tests</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -20,14 +20,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\product-api\product-api.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Constants\" />
   </ItemGroup>
 
 </Project>
