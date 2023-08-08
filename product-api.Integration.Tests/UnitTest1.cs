@@ -1,4 +1,4 @@
-namespace product_db.Unit.Tests
+namespace product_api.Integration.Tests
 {
     public class UnitTest1
     {
