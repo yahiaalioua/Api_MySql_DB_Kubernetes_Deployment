@@ -3,7 +3,7 @@ name: product-api-docker-build-push
 on:
   push:
     branches:
-      - 'main'
+      - 'production'
     paths-ignore:
       - '**/*.yaml'
       - '**/*.yml'
