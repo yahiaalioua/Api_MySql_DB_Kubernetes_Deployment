@@ -36,5 +36,19 @@ namespace product_db.Unit.Tests
 
 
         }
+
+        [Fact]
+        public void ShouldGetAllProductsFromDb()
+        {
+            //arrange
+            _storageBroker.Setup(x => x.GetProductsAsync()).Returns(Enumerable.Empty<Product>().AsQueryable());
+            //act
+
+            _productService.GetProducts();
+            //assert
+            _storageBroker.Verify(x => x.GetProductsAsync(), Times.Once());
+
+
+        }
     }
 }
