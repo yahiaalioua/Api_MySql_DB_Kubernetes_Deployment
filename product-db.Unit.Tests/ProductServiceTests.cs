@@ -24,7 +24,7 @@ namespace product_db.Unit.Tests
         public async Task ShouldAddProductToDb()
         {
             //arrange
-            AddProductDto productDto = new("nike shoes", "43 black", 120);
+            AddProductDto productDto = new("nike sneakers", "43 black", 120);
             _storageBroker.Setup(x => x.AddProductAsync(It.IsAny<Product>()));
             _unityOfWork.Setup(x => x.SaveChangesAsync());
             //act
