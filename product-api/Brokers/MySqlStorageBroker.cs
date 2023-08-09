@@ -16,7 +16,7 @@ namespace product_api.Brokers
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(_configuration.GetConnectionString("DbConnStr")!);
+            optionsBuilder.UseMySQL(_configuration.GetConnectionString("MysqlDbConnStr")!);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
