@@ -6,10 +6,10 @@ namespace product_api.Services.FoundationServices
 {
     public class ProductService : IProductService
     {
-        private readonly IStorageBroker _storageBroker;
+        private readonly IProductRepository _storageBroker;
         private readonly IUnityOfWork _unityOfWork;
 
-        public ProductService(IStorageBroker storageBroker, IUnityOfWork unityOfWork)
+        public ProductService(IProductRepository storageBroker, IUnityOfWork unityOfWork)
         {
             _storageBroker = storageBroker;
             _unityOfWork = unityOfWork;

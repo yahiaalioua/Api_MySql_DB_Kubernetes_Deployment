@@ -3,12 +3,11 @@ using product_api.Models;
 
 namespace product_api.Brokers
 {
-    public class StorageBroker : IStorageBroker
+    public  class ProductRepository : IProductRepository
     {
+        private readonly StorageBroker _storageBroker;
 
-        private readonly MySqlStorageBroker _storageBroker;
-
-        public StorageBroker(MySqlStorageBroker storageBroker)
+        public ProductRepository(StorageBroker storageBroker)
         {
             _storageBroker = storageBroker;
         }
