@@ -8,7 +8,7 @@ using product_api.Brokers;
 
 namespace product_api.Migrations
 {
-    [DbContext(typeof(MySqlStorageBroker))]
+    [DbContext(typeof(StorageBroker))]
     partial class MySqlStorageBrokerModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

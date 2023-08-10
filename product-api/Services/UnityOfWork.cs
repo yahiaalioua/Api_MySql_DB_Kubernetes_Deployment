@@ -6,9 +6,9 @@ namespace product_api.Services
 {
     public class UnityOfWork : IUnityOfWork
     {
-        private MySqlStorageBroker _storageBroker;
+        private StorageBroker _storageBroker;
 
-        public UnityOfWork(MySqlStorageBroker storageBroker)=>
+        public UnityOfWork(StorageBroker storageBroker)=>
             _storageBroker = storageBroker;
 
         public async Task SaveChangesAsync()

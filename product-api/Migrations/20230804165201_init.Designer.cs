@@ -9,7 +9,7 @@ using product_api.Brokers;
 
 namespace product_api.Migrations
 {
-    [DbContext(typeof(MySqlStorageBroker))]
+    [DbContext(typeof(StorageBroker))]
     [Migration("20230804165201_init")]
     partial class init
     {

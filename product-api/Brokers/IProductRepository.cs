@@ -2,7 +2,7 @@
 
 namespace product_api.Brokers
 {
-    public partial interface IStorageBroker
+    public partial interface IProductRepository
     {
         Task AddProductAsync(Product product);
         IQueryable<Product> GetProductsAsync();
